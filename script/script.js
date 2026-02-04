@@ -295,6 +295,6 @@ document.addEventListener("DOMContentLoaded", () => {
     
     resultMessage.textContent = passed
       ? "Congratulations, you passed!"
-      : "It wasn't this time, try again!";
+      : "You didn't pass this time. Try again!";
   }
 });
