@@ -220,7 +220,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const correctDecoded = decodeHTML(current.correct_answer);
 
     questionTitle.textContent = decodeHTML(current.question);
-    questionOptions.innerHTML = "";
+    
+    // Clear previous options safely
+    while (questionOptions.firstChild) {
+      questionOptions.removeChild(questionOptions.firstChild);
+    }
+    
     answers.forEach((answer) => {
       const button = document.createElement("button");
       button.type = "button";
@@ -237,7 +242,15 @@ document.addEventListener("DOMContentLoaded", () => {
       questionOptions.appendChild(button);
     });
 
-    questionFooter.innerHTML = `QUESTION ${currentIndex + 1} / <strong class="question-total">${totalQuestions}</strong>`;
+    // Build question footer safely
+    while (questionFooter.firstChild) {
+      questionFooter.removeChild(questionFooter.firstChild);
+    }
+    questionFooter.textContent = `QUESTION ${currentIndex + 1} / `;
+    const totalStrong = document.createElement("strong");
+    totalStrong.className = "question-total";
+    totalStrong.textContent = totalQuestions.toString();
+    questionFooter.appendChild(totalStrong);
     startTimer();
   };
 
