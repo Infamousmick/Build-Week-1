@@ -106,8 +106,21 @@ window.addEventListener("load", function () {
 const TIMELIMIT = 30;
 let timePassed = 0;
 let timeLeft = TIMELIMIT;
+let currentObject = {};
+randomQuestion();
 
-startTimer();
+function randomQuestion() {
+  let randomIndex = 0;
+  let container = document.querySelector("main");
+  randomIndex = Math.floor(Math.random() * questions.length);
+  currentObject = questions[randomIndex];
+  questions.splice(randomIndex, 1);
+  startTimer();
+
+  let questionTitle = currentObject.question;
+  container.textContent = questionTitle;
+}
+
 // Funzione per fare il conto alla rovescia
 function startTimer() {
   let secondiElement = this.document.querySelector(".secondi");
