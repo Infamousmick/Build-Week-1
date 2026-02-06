@@ -103,21 +103,26 @@ window.addEventListener("load", function () {
   let timerElement = document.querySelector(".timer");
 });
 
-const TIMELIMIT = 30;
+const TIMELIMIT = 5;
 let timePassed = 0;
 let timeLeft = TIMELIMIT;
 let currentObject = {};
 let risposte = [];
+let punteggio = 0;
+let risposteDate = 0;
+let timerId = null;
+
 randomQuestion();
 
 function randomQuestion() {
+  risposte = [];
   let randomIndex = 0;
   let titleContainer = document.querySelector(".mainText");
   randomIndex = Math.floor(Math.random() * questions.length);
   currentObject = questions[randomIndex];
   questions.splice(randomIndex, 1);
-  risposte.push(questions[randomIndex].correct_answer);
-  risposte.push(...questions[randomIndex].incorrect_answers);
+  risposte.push(currentObject.correct_answer);
+  risposte.push(...currentObject.incorrect_answers);
   console.log(risposte);
   let questionTitle = currentObject.question;
   titleContainer.innerHTML = `<h1>${questionTitle}</h1>`;
@@ -127,14 +132,26 @@ function randomQuestion() {
 }
 function randomAnswers() {
   let copy = [...risposte];
+  let arr = [];
 }
 
 function injectAnswers() {
-  let formContainer = document.querySelector(".answerContainer");
   let firstRow = document.querySelector("#row1");
   firstRow.innerHTML = "";
   let secondRow = document.querySelector("#row2");
   secondRow.innerHTML = "";
+
+  let resultContainer = document.querySelector(".resultContainer");
+  resultContainer.innerHTML = "";
+  resultParagraph = document.createElement("p");
+  resultParagraph.textContent = `QUESTION ${risposteDate + 1} `;
+  resultStrong = document.createElement("strong");
+  resultStrong.textContent = "/ 10";
+  resultParagraph.appendChild(resultStrong);
+  resultContainer.appendChild(resultParagraph);
+
+  // Mescolo l'array altrimenti la risposta corretta sarebbe sempre la prima
+  risposte.sort(() => Math.random() - 0.5);
 
   risposte.forEach((answer, index) => {
     let radio = document.createElement("input");
@@ -153,30 +170,48 @@ function injectAnswers() {
       secondRow.appendChild(radio);
       secondRow.appendChild(label);
     }
+
+    label.addEventListener("click", () => {
+      clearInterval(timerId);
+      let rispostaInput = label.textContent;
+      let rispostaCorretta = currentObject.correct_answer;
+      risposteDate++;
+      if (rispostaInput == rispostaCorretta) {
+        console.log("Hai risposto correttamente");
+        punteggio++;
+      } else {
+        console.log("hai sbagliato");
+      }
+      checkRisposteDate();
+    });
   });
 }
 // Funzione per fare il conto alla rovescia
 function startTimer() {
+  if (timerId) {
+    clearInterval(timerId);
+  }
+  timePassed = 0;
+  timeLeft = TIMELIMIT;
+
   let secondiElement = this.document.querySelector(".secondi");
   const circleElement = document.querySelector(".timer");
+  updateCircle(circleElement);
 
-  // Provo a iniettare il tempo rimanente
-  let container = document.querySelector("body");
-  let elemento = document.createElement("p");
   secondiElement.textContent = timeLeft;
-
-  const timerId = setInterval(() => {
-    console.log(timeLeft);
+  timerId = setInterval(() => {
     timePassed++;
     timeLeft = TIMELIMIT - timePassed;
+    console.log(timeLeft);
     updateCircle(circleElement);
-    if (timePassed == 30) {
+    if (timeLeft <= 0) {
       clearInterval(timerId);
       console.log("Timer scaduto!");
+      risposteDate++;
+      checkRisposteDate();
     }
     secondiElement.textContent = timeLeft;
   }, 1000);
-  container.appendChild(elemento);
 }
 
 function updateCircle(element) {
@@ -186,4 +221,16 @@ function updateCircle(element) {
     radial-gradient(closest-side, #1e0b36 79%, transparent 80% 100%),
     conic-gradient(#5b5b5b  ${percentage}%, #00ffff 0)
   `;
+}
+
+function checkRisposteDate() {
+  if (risposteDate < 10) {
+    randomQuestion();
+  } else {
+    console.log("Hai finito le domande!");
+    if (timerId) clearInterval(timerId);
+    localStorage.setItem("score", punteggio);
+    window.location.href = "extra.html";
+  }
+  console.log(`Risposta data ${risposteDate}, risposte corrette ${punteggio}`);
 }
