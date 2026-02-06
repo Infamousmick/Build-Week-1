@@ -118,7 +118,7 @@ function randomQuestion() {
   startTimer();
 
   let questionTitle = currentObject.question;
-  container.textContent = questionTitle;
+  // container.textContent = questionTitle;
 }
 
 // Funzione per fare il conto alla rovescia

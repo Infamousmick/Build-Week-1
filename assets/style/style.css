@@ -1,6 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-image: url("../img/bg.jpg");
   width: 100%;
+  min-height: 100vh;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -14,7 +19,8 @@ header {
 .logoContainer img {
   width: 145px;
   height: 33px;
-  padding: 3% 5%;
+  padding: 0;
+  margin: 30px 70px
 }
 
 .title {
@@ -23,7 +29,7 @@ header {
 
 h1 {
   color: white;
-  font-family: "Outfit";
+  font-family: "Outfit", sans-serif;
   font-size: 60px;
   line-height: 55px;
 }
@@ -43,7 +49,7 @@ h2 {
   flex-wrap: wrap;
   width: 30%;
   padding: 1% 0 0 5%;
-  font-family: "Outfit";
+  font-family: "Outfit", sans-serif;
 }
 
 .mainText p {
@@ -148,7 +154,7 @@ input[type="checkbox"]:checked::before {
   flex-direction: column;
   justify-content: flex-end;
   position: absolute;
-  top: 40px;
+  top: 50px;
   left: 850px;
 }
 
@@ -198,7 +204,7 @@ input[type="checkbox"]:checked::before {
 
 .titoloFinal {
   color: white;
-  font-family: "Outfit";
+  font-family: "Outfit", sans-serif;
   font-size: 60px;
   line-height: 55px;
   display: flex;
@@ -214,4 +220,86 @@ input[type="checkbox"]:checked::before {
   color: white;
   border-radius: 20px;
   background-color: #d2009321;
+}
+
+.questionContainer {
+  margin-top: 80px;
+  width: 90%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+
+  height: 60vh;
+  border: 2px solid red;
+}
+
+.questionCard {
+  display: flex;
+  flex-direction: column;
+  gap: 50px
+}
+
+.questionCard .mainText {
+  width: 100%;
+  border: 2px solid gold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.questionCard .mainText h1 {
+  text-align: center;
+  align-items: center;
+}
+
+.answerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px
+}
+
+.answerRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 150px
+}
+
+.answerRow input[type="radio"] {
+  display: none;
+  padding: 20px;
+}
+
+.answerRow label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  padding: 20px;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 4px solid white;
+  border-bottom-color: rgba(255, 255, 255, 0.337);
+  font-family: "Outfit", sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  border-radius: 40px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: scale 0.2s ease;
+}
+
+.answerRow label:hover {
+  scale: 0.95
+}
+
+
+.answerRow label:active {
+  background-color: rgba(74, 74, 74, 0.134);
+  color: rgb(135, 135, 135);
+  border: 4px solid rgb(176, 176, 176);
+  border-bottom-color: rgba(69, 68, 68, 0.205);
 }
