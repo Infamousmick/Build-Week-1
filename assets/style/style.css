@@ -20,7 +20,7 @@ header {
   width: 145px;
   height: 33px;
   padding: 0;
-  margin: 30px 70px
+  margin: 30px 70px;
 }
 
 .title {
@@ -238,11 +238,14 @@ input[type="checkbox"]:checked::before {
 .questionCard {
   display: flex;
   flex-direction: column;
-  gap: 20px
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }
 
 .questionCard .mainText {
   width: 100%;
+  max-width: 700px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -250,8 +253,10 @@ input[type="checkbox"]:checked::before {
 }
 
 .questionCard .mainText h1 {
+  font-size: 30px;
   text-align: center;
   align-items: center;
+  font-weight: 400;
 }
 
 .answerContainer {
@@ -266,7 +271,7 @@ input[type="checkbox"]:checked::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 40px
+  gap: 40px;
 }
 
 .answerRow input[type="radio"] {
@@ -294,9 +299,8 @@ input[type="checkbox"]:checked::before {
 }
 
 .answerRow label:hover {
-  scale: 0.95
+  scale: 0.95;
 }
-
 
 .answerRow label:active {
   background-color: rgba(74, 74, 74, 0.134);
@@ -306,6 +310,10 @@ input[type="checkbox"]:checked::before {
 }
 
 .resultContainer {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: center;
   color: white;
@@ -315,5 +323,5 @@ input[type="checkbox"]:checked::before {
 }
 
 .resultContainer p strong {
-  color: #900080
+  color: #900080;
 }

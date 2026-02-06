@@ -107,20 +107,54 @@ const TIMELIMIT = 30;
 let timePassed = 0;
 let timeLeft = TIMELIMIT;
 let currentObject = {};
+let risposte = [];
 randomQuestion();
 
 function randomQuestion() {
   let randomIndex = 0;
-  let container = document.querySelector("main");
+  let titleContainer = document.querySelector(".mainText");
   randomIndex = Math.floor(Math.random() * questions.length);
   currentObject = questions[randomIndex];
   questions.splice(randomIndex, 1);
-  startTimer();
-
+  risposte.push(questions[randomIndex].correct_answer);
+  risposte.push(...questions[randomIndex].incorrect_answers);
+  console.log(risposte);
   let questionTitle = currentObject.question;
-  // container.textContent = questionTitle;
+  titleContainer.innerHTML = `<h1>${questionTitle}</h1>`;
+  randomAnswers();
+  injectAnswers();
+  startTimer();
+}
+function randomAnswers() {
+  let copy = [...risposte];
 }
 
+function injectAnswers() {
+  let formContainer = document.querySelector(".answerContainer");
+  let firstRow = document.querySelector("#row1");
+  firstRow.innerHTML = "";
+  let secondRow = document.querySelector("#row2");
+  secondRow.innerHTML = "";
+
+  risposte.forEach((answer, index) => {
+    let radio = document.createElement("input");
+    radio.type = "radio";
+    radio.name = "answer";
+    radio.id = `radio${index + 1}`;
+    radio.value = answer;
+
+    let label = document.createElement("label");
+    label.for = `radio${index + 1}`;
+    label.textContent = answer;
+    if (index <= 1) {
+      firstRow.appendChild(radio);
+      firstRow.appendChild(label);
+    } else {
+      secondRow.appendChild(radio);
+      secondRow.appendChild(label);
+    }
+  });
+}
 // Funzione per fare il conto alla rovescia
 function startTimer() {
   let secondiElement = this.document.querySelector(".secondi");
