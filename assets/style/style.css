@@ -9,18 +9,27 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
-.logoContainer,
 header {
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 200px;
+  position: relative;
+}
+
+.logoContainer {
+  width: auto;
 }
 
 .logoContainer img {
-  width: 145px;
-  height: 33px;
+  width: 220px;
+  height: auto;
   padding: 0;
-  margin: 30px 70px;
+  margin: 0;
 }
 
 .title {
@@ -149,13 +158,12 @@ input[type="checkbox"]:checked::before {
 }
 
 .timerContainer {
-  width: 100%;
+  width: auto;
+  margin: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  position: absolute;
-  top: 50px;
-  left: 850px;
+  align-items: center;
 }
 
 .timer {
@@ -225,14 +233,13 @@ input[type="checkbox"]:checked::before {
 .questionContainer {
   display: flex;
   flex-direction: column;
-  margin-top: 80px;
   width: 90%;
   max-width: 1200px;
   min-height: 500px;
   margin-left: auto;
   margin-right: auto;
-  height: 60vh;
-  gap: 70px;
+  min-height: 500px;
+  gap: 50px;
 }
 
 .questionCard {
@@ -246,10 +253,12 @@ input[type="checkbox"]:checked::before {
 .questionCard .mainText {
   width: 100%;
   max-width: 700px;
+  height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
+  overflow: hidden;
 }
 
 .questionCard .mainText h1 {
@@ -310,16 +319,15 @@ input[type="checkbox"]:checked::before {
 }
 
 .resultContainer {
-  position: absolute;
-  bottom: 50px;
-  left: 0;
-  right: 0;
+  width: 100%;
   display: flex;
   justify-content: center;
   color: white;
   font-family: "Outfit", sans-serif;
   font-size: 20px;
   line-height: 55px;
+  margin-top: auto;
+  padding-bottom: 30px;
 }
 
 .resultContainer p strong {
