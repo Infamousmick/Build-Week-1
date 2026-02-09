@@ -144,21 +144,28 @@ input[type="checkbox"]:checked::before {
   margin-top: -2px;
 }
 
+
+#disclaimer:checked~.proceedBtn {
+  background-color: #00ffff;
+  color: black;
+  pointer-events: auto;
+}
+
 .proceedBtn {
   width: 180px;
   height: 53px;
-  background-color: #00ffff;
-  color: black;
+  background-color: rgba(70, 70, 70, 0.2);
+  color: rgba(0, 0, 0, 0.604);
   font-weight: bolder;
   font-size: 19px;
   border: none;
   margin-left: 24%;
-   transition: 0.3s;
-  /* box-shadow: 0 0 30px rgba(25, 246, 255, 0.9); */
+  transition: 0.3s;
+  pointer-events: none;
   cursor: pointer;
 }
 
-.proceedBtn:hover {
+#disclaimer:checked~.proceedBtn:hover {
   box-shadow: 0 0 30px rgba(25, 246, 255, 0.9);
 }
 
@@ -236,8 +243,8 @@ input[type="checkbox"]:checked::before {
   font-size: larger;
   display: flex;
   justify-content: center;
-align-items: center;
-text-align: center;
+  align-items: center;
+  text-align: center;
 }
 
 .questionContainer {
